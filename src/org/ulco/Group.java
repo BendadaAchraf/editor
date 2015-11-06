@@ -2,7 +2,7 @@ package org.ulco;
 
 import java.util.Vector;
 
-public class Group {
+public class Group extends  GraphicsObject {
 
     public Group() {
         m_groupList = new  Vector<Group>();
@@ -22,21 +22,14 @@ public class Group {
         parseGroups(str.substring(groupsIndex + 8, endIndex - 1));
     }
 
-    public void add(Object object) {
-        if (object instanceof Group) {
-            addGroup((Group)object);
-        } else {
-            addObject((GraphicsObject)object);
-        }
-    }
+    public void add(GraphicsObject object) {
 
-    private void addGroup(Group group) {
-        m_groupList.add(group);
-    }
-
-    private void addObject(GraphicsObject object) {
         m_objectList.add(object);
+
     }
+
+
+
 
     public Group copy() {
         Group g = new Group();
@@ -44,18 +37,26 @@ public class Group {
         for (Object o : m_objectList) {
             GraphicsObject element = (GraphicsObject) (o);
 
-            g.addObject(element.copy());
+            g.add(element.copy());
         }
         for (Object o : m_groupList) {
             Group element = (Group) (o);
 
-            g.addGroup(element.copy());
+            g.add(element.copy());
         }
         return g;
     }
 
+
+
+
     public int getID() {
         return m_ID;
+    }
+
+    @Override
+    boolean isClosed(Point pt, double distance) {
+        return false;
     }
 
     public void move(Point delta) {
@@ -66,11 +67,11 @@ public class Group {
 
             element.move(delta);
         }
-        for (Object o : m_groupList) {
+        /*for (Object o : m_groupList) {
             Group element = (Group) (o);
 
             element.move(delta);
-        }
+        }*/
     }
 
     private int searchSeparator(String str) {
@@ -137,12 +138,15 @@ public class Group {
     }
 
     public int size() {
-        int size = m_objectList.size();
+        int size = 0;
 
-        for (int i = 0; i < m_groupList.size(); ++i) {
-            Group element = m_groupList.elementAt(i);
+        for (int i = 0; i < m_objectList.size(); ++i) {
+            GraphicsObject element = m_objectList.elementAt(i);
+            if(element instanceof Group)
+                size+=((Group) element).size();
+            else
 
-            size += element.size();
+                size ++;
         }
         return size;
     }
@@ -153,20 +157,30 @@ public class Group {
         for (int i = 0; i < m_objectList.size(); ++i) {
             GraphicsObject element = m_objectList.elementAt(i);
 
-            str += element.toJson();
-            if (i < m_objectList.size() - 1) {
-                str += ", ";
+            if (!(element instanceof Group)) {
+                str += element.toJson();
+                if (i < m_objectList.size() - 1) {
+                    str += ", ";
+                }
+
             }
         }
+
         str += " }, groups : { ";
 
-        for (int i = 0; i < m_groupList.size(); ++i) {
-            Group element = m_groupList.elementAt(i);
+        for (int i = 0; i < m_objectList.size(); ++i) {
+            GraphicsObject element = m_objectList.elementAt(i);
+            if (element instanceof Group) {
+                //str += " }, groups : { ";
 
-            str += element.toJson();
+                str += element.toJson();
+            }
+
         }
         return str + " } }";
     }
+
+
 
     public String toString() {
         String str = "group[[";
