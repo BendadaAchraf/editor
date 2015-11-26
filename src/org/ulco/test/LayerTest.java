@@ -15,6 +15,21 @@ public class LayerTest extends TestCase {
         assertEquals(layer.get(0).getID(), oldID + 2);
     }
 
+    public void testClosed() throws Exception {
+        Layer layer = new Layer();
+        Group g = new Group();
+        Circle c = new Circle(new Point(2, 8), 10);
+        Square s = new Square(new Point(-2, -3), 3);
+
+        g.add(c);
+        g.add(s);
+        layer.add(g);
+        assertTrue(Select.select(layer,new Point(1, 1),8).size() == 2);
+
+    }
+
+
+
     public void testJSON() throws Exception {
         Layer l = new Layer();
         Square s = new Square(new Point(0, 0), 5);
@@ -25,4 +40,9 @@ public class LayerTest extends TestCase {
         assertEquals(l.toJson(), "{ type: layer, objects : { { type: square, center: { type: point, x: 0.0, y: 0.0 }, length: 5.0 }, " +
                 "{ type: circle, center: { type: point, x: 5.0, y: 5.0 }, radius: 4.0 } } }");
     }
+
+
 }
+
+
+

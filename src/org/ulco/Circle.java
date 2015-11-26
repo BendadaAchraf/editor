@@ -1,14 +1,11 @@
 package org.ulco;
 public class Circle extends GraphicsObject {
-    public Circle()
-    {
-
-    }
+    public Circle() {}
     public Circle(Point center, double radius) {
         this.m_center = center;
         this.m_radius = radius;
     }
-    public void CreatBytype(String json) {
+    public  void CreatBytype(String json) {
         String str = json.replaceAll("\\s+", "");
         int centerIndex = str.indexOf("center");
         int radiusIndex = str.indexOf("radius");
@@ -31,10 +28,6 @@ public class Circle extends GraphicsObject {
     public String toString() {
         return "circle[" + m_center.toString() + "," + m_radius + "]";
     }
-
-
-
     private  Point m_center;
     private  double m_radius;
-
 }

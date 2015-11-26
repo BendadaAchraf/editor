@@ -25,10 +25,6 @@ public class Group extends  GraphicsObject {
             GraphicsObject element = (GraphicsObject) (o);
             g.add(element.copy());
         }
-        /*for (Object o : m_groupList) {
-            Group element = (Group) (o);
-            g.add(element.copy());
-        }*/
         return g;
     }
     public int getID() {
@@ -44,10 +40,6 @@ public class Group extends  GraphicsObject {
             GraphicsObject element = (GraphicsObject) (o);
             element.move(delta);
         }
-        /*for (Object o : m_groupList) {
-            Group element = (Group) (o);
-            element.move(delta);
-        }*/
     }
     private int searchSeparator(String str) {
         int index = 0;
@@ -72,7 +64,6 @@ public class Group extends  GraphicsObject {
             return -1;
         }
     }
-
     private void parseGroups(String groupsStr) {
         while (!groupsStr.isEmpty()) {
             int separatorIndex = searchSeparator(groupsStr);
@@ -85,14 +76,11 @@ public class Group extends  GraphicsObject {
             m_objectList.add(JSON.parseGroup(groupStr));
             if (separatorIndex == -1) {
                 groupsStr = "";
+            } else {
+                groupsStr = groupsStr.substring(separatorIndex + 1);
             }
         }
     }
-
-         public Vector<GraphicsObject> getGroup() {
-              return m_objectList;
-         }
-
     private void parseObjects(String objectsStr) {
         while (!objectsStr.isEmpty()) {
             int separatorIndex = searchSeparator(objectsStr);
@@ -136,7 +124,7 @@ public class Group extends  GraphicsObject {
         for (int i = 0; i < m_objectList.size(); ++i) {
             GraphicsObject element = m_objectList.elementAt(i);
             if (element instanceof Group) {
-               // str += " }, groups : { ";
+                //str += " }, groups : { ";
                 str += element.toJson();
             }
         }
@@ -144,7 +132,6 @@ public class Group extends  GraphicsObject {
     }
     public String toString() {
         String str = "group[[";
-
         for (int i = 0; i < m_objectList.size(); ++i) {
             GraphicsObject element = m_objectList.elementAt(i);
             str += element.toString();
@@ -155,20 +142,17 @@ public class Group extends  GraphicsObject {
         str += "],[";
         for (int i = 0; i < m_objectList.size(); ++i) {
             GraphicsObject element = m_objectList.elementAt(i);
-            if (element instanceof Group) {
-                str += element.toString();
-            }
+            if(element instanceof Group) {
+                str += element.toString();}
         }
         return str + "]]";
     }
-
+    public Vector<GraphicsObject> getElements(){
+        return m_objectList;
+    }
     @Override
     public void CreatBytype(String str) {
-
     }
-
-
-    //private Vector<Group> m_groupList;
     private Vector<GraphicsObject> m_objectList;
     private int m_ID;
 }

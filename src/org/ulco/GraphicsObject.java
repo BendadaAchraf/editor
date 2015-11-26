@@ -8,7 +8,9 @@ abstract public class GraphicsObject {
     abstract public GraphicsObject copy();
 
     public int getID() {
+
         return m_ID;
+
     }
 
     abstract boolean isClosed(Point pt, double distance);
@@ -20,6 +22,8 @@ abstract public class GraphicsObject {
     abstract public String toString();
 
     abstract public void CreatBytype(String str);
+
+
 
 
 
