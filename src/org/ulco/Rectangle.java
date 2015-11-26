@@ -1,13 +1,18 @@
 package org.ulco;
 
 public class Rectangle extends GraphicsObject {
+
     public Rectangle(Point center, double height, double width) {
         this.m_origin = center;
         this.m_height = height;
         this.m_width = width;
     }
 
-    public Rectangle(String json) {
+    public Rectangle()
+    {
+
+    }
+    public void CreatBytype(String json) {
         String str = json.replaceAll("\\s+","");
         int centerIndex = str.indexOf("center");
         int heightIndex = str.indexOf("height");
@@ -42,7 +47,7 @@ public class Rectangle extends GraphicsObject {
         return "rectangle[" + m_origin.toString() + "," + m_height + "," + m_width + "]";
     }
 
-    private final Point m_origin;
-    private final double m_height;
-    private final double m_width;
+    private  Point m_origin;
+    private  double m_height;
+    private  double m_width;
 }

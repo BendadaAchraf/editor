@@ -5,13 +5,19 @@ public class JSON {
         GraphicsObject o = null;
         String str = json.replaceAll("\\s+", "");
         String type = str.substring(str.indexOf("type") + 5, str.indexOf(","));
+       // on creé un instance de ObjectGraphic
+       // *methode Init <--String
+        try {
+            Class c = Class.forName("org.ulco." + type.substring(0,1).toUpperCase()+ type.substring(1));
 
-        if (type.compareTo("square") == 0) {
-            o = new Square(str);
-        } else if (type.compareTo("rectangle") == 0) {
-            o = new Rectangle(str);
-        } else if (type.compareTo("circle") == 0) {
-            o = new Circle(str);
+           o= (GraphicsObject) c.newInstance();
+            o.CreatBytype(str);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
         return o;
     }

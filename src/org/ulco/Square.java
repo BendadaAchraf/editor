@@ -6,7 +6,7 @@ public class Square extends GraphicsObject {
         this.m_length = length;
     }
 
-    public Square(String json) {
+    public void CreatBytype(String json) {
         String str = json.replaceAll("\\s+","");
         int centerIndex = str.indexOf("center");
         int lengthIndex = str.indexOf("length");
@@ -34,11 +34,15 @@ public class Square extends GraphicsObject {
     public String toJson() {
         return "{ type: square, center: " + m_origin.toJson() + ", length: " + this.m_length + " }";
     }
+    public Square()
+    {
+
+    }
 
     public String toString() {
         return "square[" + m_origin.toString() + "," + m_length + "]";
     }
 
-    private final Point m_origin;
-    private final double m_length;
+    private  Point m_origin;
+    private  double m_length;
 }

@@ -2,7 +2,7 @@ package org.ulco;
 
 abstract public class GraphicsObject {
     public GraphicsObject() {
-        m_ID = ++ID.ID;
+        m_ID = ID.instance();
     }
 
     abstract public GraphicsObject copy();
@@ -18,6 +18,10 @@ abstract public class GraphicsObject {
     abstract public String toJson();
 
     abstract public String toString();
+
+    abstract public void CreatBytype(String str);
+
+
 
     private int m_ID;
 }

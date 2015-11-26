@@ -2,10 +2,11 @@ package org.ulco;
 
 import java.util.Vector;
 
-public class Layer {
+public class Layer  {
+
     public Layer() {
         m_list = new Vector<GraphicsObject>();
-        m_ID = ++ID.ID;
+        m_ID = ID.instance();
     }
 
     public Layer(String json) {
@@ -77,7 +78,7 @@ public class Layer {
         }
     }
 
-    public GraphicsObjects select(Point pt, double distance) {
+   /* public GraphicsObjects select(Point pt, double distance) {
         GraphicsObjects list = new GraphicsObjects();
 
         for (GraphicsObject object : m_list) {
@@ -85,8 +86,10 @@ public class Layer {
                 list.add(object);
             }
         }
+
+
         return list;
-    }
+    }*/
 
     public String toJson() {
         String str = "{ type: layer, objects : { ";
@@ -101,6 +104,9 @@ public class Layer {
         }
         return str + " } }";
     }
+    public Vector<GraphicsObject> getM_list(){
+                return  m_list;
+         }
 
     private Vector<GraphicsObject> m_list;
     private int m_ID;
