@@ -1,10 +1,20 @@
 package org.ulco;
-public class Rectangle extends GraphicsObject {
+
+import java.text.CollationElementIterator;
+
+public  class Rectangle extends GraphicsObject {
     public Rectangle(Point center, double height, double width) {
         this.m_origin = center;
         this.m_height = height;
         this.m_width = width;
+
     }
+
+    public void  CreatebyCouleur( Couleur C) {
+
+        this.couleur=C;
+    }
+
     public void CreatBytype(String json) {
         String str = json.replaceAll("\\s+","");
         int centerIndex = str.indexOf("center");
@@ -19,11 +29,27 @@ public class Rectangle extends GraphicsObject {
         return new Rectangle(m_origin.copy(), m_height, m_width);
     }
     public Point getOrigin() { return m_origin; }
+
+
+    public    Double getw()
+    {
+        return m_width;
+    }
+    public    Double geth()
+    {
+        return m_height;
+    }
+
     public boolean isClosed(Point pt, double distance) {
+
+
         Point center = new Point(m_origin.getX() + m_width / 2, m_origin.getY() + m_height / 2);
+
         return Math.sqrt((center.getX() - pt.getX()) * (center.getX() - pt.getX()) +
                 ((center.getY() - pt.getY()) * (center.getY() - pt.getY()))) <= distance;
     }
+
+
     void move(Point delta) { m_origin.move(delta); }
     public String toJson() {
         return "{ type: rectangle, center: " + m_origin.toJson() + ", height: " + this.m_height + ", width: " + this.m_width + " }";
@@ -31,9 +57,20 @@ public class Rectangle extends GraphicsObject {
     public String toString() {
         return "rectangle[" + m_origin.toString() + "," + m_height + "," + m_width + "]";
     }
+
     public Rectangle() {
+    super();
     }
-    private  Point m_origin;
-    private   double m_height;
-    private   double m_width;
+    private    Point m_origin;
+    private     double m_height;
+    private     double m_width;
+    private Couleur couleur;
+
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public Couleur getCouleur(Couleur couleur) {
+        return couleur;
+    }
 }

@@ -41,7 +41,7 @@ public class Group extends  GraphicsObject {
             element.move(delta);
         }
     }
-    private int searchSeparator(String str) {
+      public static int searchSeparator(String str) {
         int index = 0;
         int level = 0;
         boolean found = false;
@@ -81,7 +81,8 @@ public class Group extends  GraphicsObject {
             }
         }
     }
-    private void parseObjects(String objectsStr) {
+
+    public  void parseObjects(String objectsStr) {
         while (!objectsStr.isEmpty()) {
             int separatorIndex = searchSeparator(objectsStr);
             String objectStr;
@@ -98,6 +99,8 @@ public class Group extends  GraphicsObject {
             }
         }
     }
+
+
     public int size() {
         int size = 0;
         for (int i = 0; i < m_objectList.size(); ++i) {
@@ -153,6 +156,11 @@ public class Group extends  GraphicsObject {
     @Override
     public void CreatBytype(String str) {
     }
-    private Vector<GraphicsObject> m_objectList;
+
+    @Override
+    public void CreatebyCouleur(Couleur C) {
+    }
+
+    private   Vector<GraphicsObject> m_objectList;
     private int m_ID;
 }

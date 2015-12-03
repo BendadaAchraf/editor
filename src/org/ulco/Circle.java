@@ -13,6 +13,15 @@ public class Circle extends GraphicsObject {
         m_center = new Point(str.substring(centerIndex + 7, radiusIndex - 1));
         m_radius = Double.parseDouble(str.substring(radiusIndex + 7, endIndex));
     }
+
+    @Override
+    public void CreatebyCouleur(Couleur C) {
+
+
+            this.couleur=C;
+
+    }
+
     public GraphicsObject copy() {
         return new Circle(m_center.copy(), m_radius);
     }
@@ -30,4 +39,14 @@ public class Circle extends GraphicsObject {
     }
     private  Point m_center;
     private  double m_radius;
+    private  Couleur couleur;
+
+
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public Couleur getCouleur(Couleur couleur) {
+        return couleur;
+    }
 }

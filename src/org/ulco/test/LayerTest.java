@@ -21,8 +21,10 @@ public class LayerTest extends TestCase {
         Circle c = new Circle(new Point(2, 8), 10);
         Square s = new Square(new Point(-2, -3), 3);
 
-        g.add(c);
+
+
         g.add(s);
+        g.add(c);
         layer.add(g);
         assertTrue(Select.select(layer,new Point(1, 1),8).size() == 2);
 

@@ -23,9 +23,12 @@ abstract public class GraphicsObject {
 
     abstract public void CreatBytype(String str);
 
+    abstract public void CreatebyCouleur(Couleur C);
 
 
 
 
     private int m_ID;
+
+
 }

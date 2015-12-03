@@ -1,6 +1,7 @@
 package org.ulco.test;
 
 import junit.framework.TestCase;
+import org.ulco.Couleur;
 import org.ulco.GraphicsObject;
 import org.ulco.Point;
 import org.ulco.Square;
@@ -24,5 +25,13 @@ public class SquareTest extends TestCase {
         Square s = new Square(new Point(0,0), 10);
 
         assertEquals(s.toJson(), s.copy().toJson());
+    }
+
+    public void testColeur() throws Exception {
+        Square s = new Square(new Point(0,0), 10);
+        Couleur C= new Couleur("rouge","jaune");
+         s.CreatebyCouleur(C);
+
+        assertEquals(s.getCouleur(),C);
     }
 }
